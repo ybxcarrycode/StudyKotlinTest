@@ -4,16 +4,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.ybxcc.testinysx.studykotlintest.R
 import com.ybxcc.testinysx.studykotlintest.adapter.ForecastListAdapter
-import com.ybxcc.testinysx.studykotlintest.bean.Forecast
-import com.ybxcc.testinysx.studykotlintest.utils.Request
+import com.ybxcc.testinysx.studykotlintest.domain.RequestForecastCommand
 import org.jetbrains.anko.async
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,27 +28,29 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ForecastListAdapter(items)
 
-        toast("Hello  Kotlin")
+//        toast("Hello  Kotlin")
 
         async {
-            Request("").run()
-            uiThread { longToast("Request test ok") }
+            val result = RequestForecastCommand("94043").execute()
+            uiThread {
+                recyclerView.adapter = ForecastListAdapter(result)
+            }
         }
 
-        val f1 = Forecast(Date(), 27.5f, "Shiny day")
-        
-        val f2 = f1.copy(temperature = 40f)
 
-        val (date, temperature, details) = f2
-
-        val date1 = f1.component1()
-        val temperature1 = f1.component2()
-        val details1 = f1.component3()
-
-        Log.e("test", "date=$date/temperatue=$temperature/details=$details")
-        Log.e("test1", "date1=$date1/temperature1=$temperature1/details1=$details1")
+//        val f1 = Forecast(Date(), 27.5f, "Shiny day")
+//        
+//        val f2 = f1.copy(temperature = 40f)
+//
+//        val (date, temperature, details) = f2
+//
+//        val date1 = f1.component1()
+//        val temperature1 = f1.component2()
+//        val details1 = f1.component3()
+//
+//        Log.e("test", "date=$date/temperatue=$temperature/details=$details")
+//        Log.e("test1", "date1=$date1/temperature1=$temperature1/details1=$details1")
     }
 
 }

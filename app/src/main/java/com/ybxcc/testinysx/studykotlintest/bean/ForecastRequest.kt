@@ -1,5 +1,6 @@
 package com.ybxcc.testinysx.studykotlintest.bean
 
+import android.util.Log
 import com.google.gson.Gson
 import java.net.URL
 
@@ -16,6 +17,7 @@ public class ForecastRequest(val zipCode: String) {
 
     fun execute(): ForecastResult {
         val forecastJsonStr = URL(COMPLETE_URL + zipCode).readText()
+        Log.e("result", forecastJsonStr)
         return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
     }
 }
