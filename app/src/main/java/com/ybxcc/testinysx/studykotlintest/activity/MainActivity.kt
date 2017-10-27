@@ -1,18 +1,14 @@
 package com.ybxcc.testinysx.studykotlintest.activity
 
-import android.app.DownloadManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.LinearLayout
-import android.widget.Toast
 import com.ybxcc.testinysx.studykotlintest.R
 import com.ybxcc.testinysx.studykotlintest.adapter.ForecastListAdapter
 import com.ybxcc.testinysx.studykotlintest.bean.Forecast
 import com.ybxcc.testinysx.studykotlintest.utils.Request
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -46,7 +42,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val f1 = Forecast(Date(), 27.5f, "Shiny day")
-        val (date, temperature, details) = f1
+        
+        val f2 = f1.copy(temperature = 40f)
+
+        val (date, temperature, details) = f2
 
         val date1 = f1.component1()
         val temperature1 = f1.component2()
